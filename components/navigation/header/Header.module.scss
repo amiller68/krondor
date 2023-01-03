@@ -1,0 +1,19 @@
+.navigation {
+  height: 10vh;
+  width: 100%;
+}
+
+.container {
+  height: 10vh;
+  width: 100%;
+  margin: 0 auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--main-background-foreground);
+}
+
+.sidebar {
+  background-color: var(--main-background-foreground);
+}
+
