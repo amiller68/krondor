@@ -18,7 +18,7 @@ const Footer: React.FC<IFooter> = ({ className, ...footerProps }) => {
     {
       key: 'documentation',
       item: 'Documentation',
-      href: 'https://github.com/amiller68/me-www',
+      href: 'https://github.com/amiller68/krondor-org',
     },
   ];
 

@@ -10,7 +10,7 @@ const Blog: NextPageWithLayout = (_props: any) => {
     {
       title: 'Welcome to Krondor.org',
       date: '2023-01-02',
-      cid: 'bafkreihrvawjlehykbydxhaxy43wzittt3lz46f3sqzmswldgeop56wh3q',
+      cid: 'bafkreiai4g4rxn3kkeqyi3vi4ovjs4ewugqxpek4x2kr7tlhbmhd2gw6nq',
     },
   ];
   return (

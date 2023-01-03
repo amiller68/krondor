@@ -19,7 +19,7 @@ const Home: NextPageWithLayout = (_props: any) => {
               blog
             </Link>
             , or check out my{' '}
-            <Link href="https://github.com/amiller68/me-www" className={'link'}>
+            <Link href="https://github.com/amiller68/krondor-org" className={'link'}>
               documentation
             </Link>{' '}
             for this site{' '}

@@ -23,7 +23,7 @@ Feel free to fork this repository and use it for your own projects, as well as s
 
 ## Install dependencies and run
 ```bash
-git clone git@github.com:amiller68/me-www.git
+git clone git@github.com:amiller68/krondor-org.git
 cd me-www
 yarn dev
 ```

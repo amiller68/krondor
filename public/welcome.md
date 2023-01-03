@@ -8,7 +8,7 @@ The scope of this first iteration is very basic -- it just comprises a blog and 
 
 I think its a good template for building NextJS applications as well, if not needing a little cleaning up. Feel free to fork it and use it for your own projects.
 
-Go check out [my repository](https://github.com/amiller68/me-www)
+Go check out [my repository](https://github.com/amiller68/krondor-org)
 
 You might notice that my blog posts are indexed by a Content Identifier (CID), which is a hash of the underlying data.
 The first cool thing I'm doing with Web3.0 for this prototype is pinning my blog posts on IPFS using a service called Estuary.
