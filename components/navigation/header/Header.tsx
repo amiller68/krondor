@@ -12,32 +12,31 @@ import { classNames } from '@lib/utilities/misc';
 export interface IHeader extends React.ComponentPropsWithoutRef<'header'> {}
 
 const Header: React.FC<IHeader> = (props: IHeader) => {
-  const [header, setHeader] = React.useState<ReactNode>(null);
-  const isDesktop = useDesktopMediaQuery();
+  // const [header, setHeader] = React.useState<ReactNode>(null);
+  // const isDesktop = useDesktopMediaQuery();
   const menu = useMenu();
 
   // Note (al): Set header in the effect to avoid SSR mismatch
-  useEffect(() => {
-    const logo = (
-      <NavigationItem
-        key={'logo'}
-        item={
-          <span className={'logo'}>
-            {' '}
-            Krondor <Tag>Alpha</Tag>{' '}
-          </span>
-        }
-        href={'/'}
-      />
-    );
-    setHeader(
-      isDesktop ? (
-        <Desktop {...{ ...props, menu, logo }} />
-      ) : (
-        <Mobile {...{ ...props, menu, logo }} />
-      )
-    );
-  }, [isDesktop, props, menu]);
+  // useEffect(() => {
+  //   const logo = (
+  //     <NavigationItem
+  //       key={'logo'}
+  //       item={
+  //         <span className={'logo'}>
+  //           {' '}<Tag>krondor.</Tag>{' '}
+  //         </span>
+  //       }
+  //       href={'/'}
+  //     />
+  //   );
+  //   setHeader(
+  //     isDesktop ? (
+  //       <Desktop {...{ ...props, menu, logo }} />
+  //     ) : (
+  //       <Mobile {...{ ...props, menu, logo }} />
+  //     )
+  //   );
+  // }, [isDesktop, props, menu]);
 
   return (
     <>
@@ -49,7 +48,27 @@ const Header: React.FC<IHeader> = (props: IHeader) => {
         )}
       >
         <div className={styles.navigation}>
-          <nav className={styles.container}>{header}</nav>
+          <nav className={styles.container}>
+              <div className="left">
+                  <NavigationItem
+                    key={'logo'}
+                    item={
+                      <span className={'logo'}>
+                        {' '}<Tag>krondor.</Tag>{' '}
+                      </span>
+                    }
+                    href={'/'}
+                  />
+              </div>
+              <div className="right">
+              {menu.map((item) => {
+                  return (
+                      <div key={item.key} className="font-size-5vh">
+                          <NavigationItem {...item} />
+                      </div>
+                  );
+              })}
+          </div></nav>
         </div>
       </header>
     </>

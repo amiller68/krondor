@@ -2,7 +2,6 @@ import PrimaryLayout from '@components/layouts/primary/PrimaryLayout';
 import styles from '@styles/pages/Home.module.scss';
 import { NextPageWithLayout } from './page';
 import * as React from 'react';
-import Image from 'next/image';
 import { P } from '@components/typography/Typography';
 import Link from 'next/link';
 
@@ -24,10 +23,6 @@ const Home: NextPageWithLayout = (_props: any) => {
             </Link>{' '}
             for this site{' '}
           </P>
-          <P>-AL</P>
-        </section>
-        <section className={styles.banner}>
-          <Image src={'/banner.jpg'} alt={'banner'} fill sizes="100vw"></Image>
         </section>
       </div>
     </>
