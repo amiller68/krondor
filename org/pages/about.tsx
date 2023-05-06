@@ -20,7 +20,7 @@ const About: NextPageWithLayout = (_props: any) => {
     {
       key: 'github',
       item: 'Github',
-      href: 'https://github.com/amiller68',
+      href: 'https://github.com/amiller68/krondor',
     },
     {
       key: 'twitter',

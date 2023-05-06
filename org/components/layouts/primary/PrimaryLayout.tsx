@@ -20,7 +20,8 @@ const PrimaryLayout: React.FC<IPrimaryLayout> = (props: IPrimaryLayout) => {
           <Header />
           <main className={styles.main}>{props.children}</main>
           <div className="m-auto" />
-          <Footer />
+          {/* Fix the footer to the bottom */}
+
         </div>
       </Page>
     </>
