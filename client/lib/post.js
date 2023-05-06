@@ -3,6 +3,10 @@ const multihashing = require('multihashing-async');
 const fs = require('fs').promises;
 const timestamp = require('unix-timestamp');
 
+// CID version 1, dag-pb codec
+const cidVersion = 1;
+const cidCodec = 'raw';
+
 const emptyPost = {
   name: '',
   cid: '',
@@ -10,11 +14,11 @@ const emptyPost = {
   date: '',
 };
 
-const fromFile = async (path) => {
+const postFromFile = async (path) => {
   console.log('fromFile', path);
   const file = await fs.readFile(path);
   const hash = await multihashing(file, 'sha2-256');
-  const cid = new CID(1, 'dag-pb', hash).toString();
+  const cid = new CID(cidVersion, cidCodec, hash).toString();
 
   // Get the name from the path
   const name = path.split('/').pop();
@@ -35,4 +39,4 @@ const withTitle = (post, title) => {
   };
 };
 
-module.exports = { emptyPost, fromFile, withTitle };
+module.exports = { emptyPost, postFromFile, withTitle };

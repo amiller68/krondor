@@ -10,8 +10,9 @@ const {
   removePost,
   manifestFromFile,
 } = require('../lib/manifest');
-const { fromFile, withTitle } = require('../lib/post');
+const { postFromFile, withTitle } = require('../lib/post');
 const { pinFile } = require('../lib/ipfs');
+const { updateBlogCid } = require('../lib/eth');
 
 const content_path = './content';
 const manifest_path = content_path + '/manifest.json';
@@ -59,7 +60,12 @@ const getManifest = () => {
   // Check paths
   checkPaths();
   // Read the manifest file
-  return manifestFromFile(manifest_path);
+  return manifestFromFile(manifest_path).then((manifest) => {
+      if (manifest.version !== version) {
+        throw new Error('Incompatible manifest version');
+      }
+      return manifest;
+  });
 };
 
 program
@@ -80,10 +86,13 @@ program
         process.exit(0);
       }
       await fs.promises.rm(content_path, { recursive: true });
-    } catch (err) {
-      // Directory doesn't exist, so we can just create it
+    } catch (e) {
+        // Do nothing
     }
-    await scratchSpace();
+    finally {
+        await scratchSpace();
+        process.exit(0);
+    }
   });
 
 const askQuestion = (question) => {
@@ -114,19 +123,19 @@ program
     }
     console.log("Reading post into IPLD + Manifest...")
     const manifest = await getManifest(manifest_path);
-    const post = await fromFile(path);
+    const post = await postFromFile(path);
     try {
       addPost(manifest, withTitle(post, title))
     } catch (err) {
       console.log("Error adding post to manifest: ", err);
       process.exit(1);
     }
-    console.log("Adding post to IPFS...")
-    const res = await pinFile(path);
-    if (res.hash !== post.hash) {
-      console.log('Hashes do not match');
-      process.exit(1);
-    }
+    // console.log("Adding post to IPFS...")
+    // const res = await pinFile(path);
+    // if (res.hash !== post.hash) {
+    //   console.log('Hashes do not match');
+    //   process.exit(1);
+    // }
     console.log("Adding post to manifest...")
     try {
       await manifestToFile(manifest, manifest_path);
@@ -155,12 +164,12 @@ program
       console.log("Error adding post to manifest: ", err);
       process.exit(1);
     }
-    console.log("Adding post to IPFS...")
-    const res = await pinFile(path);
-    if (res.hash !== post.hash) {
-      console.log('Hashes do not match');
-      process.exit(1);
-    }
+    // console.log("Adding post to IPFS...")
+    // const res = await pinFile(path);
+    // if (res.hash !== post.hash) {
+    //   console.log('Hashes do not match');
+    //   process.exit(1);
+    // }
     console.log("Adding post to manifest...")
     try {
       await manifestToFile(manifest, manifest_path);
@@ -194,7 +203,7 @@ async function getPost(name) {
   const path = posts_path + '/' + name + '.md';
   try {
     await fs.promises.access(path, fs.constants.F_OK);
-    return fromFile(path);
+    return postFromFile(path);
   } catch (err) {
     console.log('Post does not exist. Exiting');
     process.exit(1);
@@ -206,7 +215,33 @@ program
   .description('Publish the local manifest to Eth and IPFS')
   .action(async () => {
     console.log('Publishing manifest to Eth and IPFS');
-
+    try {
+        // Try and get the manifest
+        const manifest = await getManifest(manifest_path);
+        // Iterate over the posts and publish them to IPFS
+        console.log('Publishing posts to IPFS');
+        for (const post of manifest.posts) {
+            console.log('Pinning post: ' + post.name);
+            const _path = posts_path + '/' + post.name;
+            const res =  await pinFile(_path)
+            if (res !== post.cid) {
+                console.log('Hashes do not match');
+                process.exit(1);
+            }
+        }
+        // Publish the manifest to IPFS
+        console.log('Publishing manifest to IPFS');
+        const manifest_res = await pinFile(manifest_path);
+        console.log('Manifest CID: ' + manifest_res);
+        // Publish the manifest to Eth
+        console.log('Publishing manifest to Eth');
+        await updateBlogCid(manifest_res);
+        console.log('Done!');
+        process.exit(0);
+    } catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
   });
 
 program.parse(process.argv);

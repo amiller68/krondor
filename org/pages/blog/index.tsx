@@ -11,6 +11,7 @@ const Blog: NextPageWithLayout = (_props: any) => {
   const [ posts, setPosts ] = React.useState<Post[]>([]);
   const [ router, setRouter ] = React.useState<any>(null);
 
+  // TODO: Fallback on Github if IPFS is down.
   React.useEffect(() => {
      fetch('/api/blog/')
       .then((r) => r.json())
@@ -25,7 +26,11 @@ const Blog: NextPageWithLayout = (_props: any) => {
             console.log("MANIFEST", manifest);
             setPosts(manifest.posts);
             // console.log(c.posts);
-          });
+          }).catch((e) => {
+            console.log(e);
+            setPosts([]);
+          }
+        );
       });
   }, [router]);
   // We don't have a real backend yet, so we'll just code the posts in here.

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@helia/interface": "^1.0.0",
+    "axios": "^1.4.0",
     "cid": "multiformats/cid",
     "cids": "^1.1.9",
     "commander": "^10.0.1",
