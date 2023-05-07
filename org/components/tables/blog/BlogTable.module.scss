@@ -1,0 +1,9 @@
+.inlineLink {
+  color: var(--main-primary);
+  text-decoration: none;
+  transition: 200ms ease all;
+  transition-property: color, opacity;
+  &:hover {
+    font-style: italic;
+  }
+}
