@@ -1,6 +1,6 @@
 {
-  "name": "contracts",
-  "version": "1.0.0",
+  "name": "krondor-contracts",
+  "version": "0.0.0",
   "description": "Upgradable contracts for my blogs backend",
   "main": "index.js",
   "author": "Al",

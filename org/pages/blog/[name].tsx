@@ -6,33 +6,44 @@ import ReactMarkdown from 'react-markdown';
 import { useRouter } from 'next/router';
 import Spinner from '@components/spinners/Spinner';
 import { P } from '@components/typography/Typography';
+import getBlogCid from '@lib/eth';
+import getCidFromGateways from '@lib/ipfs';
 
 // This is the blog post page component. It is responsible for fetching the post and pulling
 // content from IPFS and rendering it.
 const Post: NextPageWithLayout = (_props: any) => {
   const router = useRouter();
   const [content, setContent] = React.useState('');
+  const [ loading, setLoading ] = React.useState<boolean>(true);
   const [error, setError] = React.useState('');
   // Fetch content from IPFS on page load.
   React.useEffect(() => {
-    const { cid } = router.query;
-    fetch('/api/blog/' + cid)
-      .then((r) => r.json())
-      .then((c) => {
-        setContent(c.content);
-        if (c.error) {
-          setError(c.error);
-        }
-      });
+    const cid = router.query.name as string;
+    const init = async () => {
+      const blogCid = await getBlogCid();
+      const post_path = `${blogCid}/${cid}`;
+      const post = await getCidFromGateways(post_path, 'text');
+      if (post.error) {
+        setError(post.error);
+      } 
+      else if (typeof post.content === 'string') {
+        setContent(post.content);
+      } else {
+        setError('Unknown error.');
+      }
+      setLoading(false);
+    };
+    init();
   }, [router]);
   return (
     <>
       <section className={styles.container}>
-        {content ? (
+        {!loading ? (
           error ? (
             <div>
               <ReactMarkdown className={styles.markdown}>{error}</ReactMarkdown>
               <P> Sometimes IPFS can be unreliable. Try reloading the page.</P>
+              <P> Error: {error} </P>
             </div>
           ) : (
             <ReactMarkdown className={styles.markdown}>{content}</ReactMarkdown>

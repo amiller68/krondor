@@ -1,41 +1,60 @@
-import styles from './BlogTable.module.scss';
+import DataTable from 'react-data-table-component';
 import Link from 'next/link';
-import { Table } from '@nextui-org/react';
-import Post from '@lib/entities/post';
+import { useRouter } from 'next/router';
+
+const customStyles = {
+  headRow: {
+    style: {
+      borderTopWidth: '2px',
+      borderTopColor: '#000',
+      borderTopStyle: 'solid',
+      borderBottomWidth: '2px',
+      borderBottomColor: '#000',
+      borderBottomStyle: 'solid',
+      fontWeight: 700,
+    },
+  },
+};
 
 export interface IBlogTable {
-  posts: Post[];
+  apply: () => any[];
 }
 
-const BlogTable: React.FC<IBlogTable> = ({ posts }) => {
-  const columns = [
+const BlogTable: React.FC<IBlogTable> = ({ apply }) => {
+  const router = useRouter();
+  const overviewColumns = [
     {
-      key: 'title',
-      label: 'Title',
+      name: 'POST TITLE',
+      selector: (row: any) => row.title,
+      sortable: true,
     },
-    { key: 'date', label: 'Date' },
+    {
+      name: 'POST DATE',
+      selector: (row: any) => row.date,
+      sortable: true,
+    },
   ];
+
+  const ExpandedComponentOverView = ({ data }: any) => (
+    <div className="flex flex-row text-white">
+      <button
+        className="w-full bg-[#CB3535] "
+        onClick={async () => router.push('/blog/' + data.name)}
+      >
+        Read More
+      </button>
+    </div>
+  );
+
   // Get the date time from the timestamp
   return (
-    <Table compact shadow={false}>
-      <Table.Header columns={columns}>
-        {(column) => (
-          <Table.Column key={column.key}>{column.label}</Table.Column>
-        )}
-      </Table.Header>
-      <Table.Body items={posts}>
-        {(item) => (
-          <Table.Row key={item.cid}>
-            <Table.Cell>
-              <Link href={`/blog/${item.cid}`} className={styles.inlineLink}>
-                <h4>{item.title}</h4>
-              </Link>
-            </Table.Cell>
-            <Table.Cell>{item.date}</Table.Cell>
-          </Table.Row>
-        )}
-      </Table.Body>
-    </Table>
+    <DataTable
+      columns={overviewColumns}
+      data={apply()}
+      customStyles={customStyles}
+      expandableRows
+      expandableRowsComponent={ExpandedComponentOverView}
+    />
   );
 };
 

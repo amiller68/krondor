@@ -1,5 +1,4 @@
 import Page from './../Page';
-import Footer from '../../navigation/footer/Footer';
 import Header from '../../navigation/header/Header';
 import React from 'react';
 import styles from './PrimaryLayout.module.scss';
@@ -20,8 +19,6 @@ const PrimaryLayout: React.FC<IPrimaryLayout> = (props: IPrimaryLayout) => {
           <Header />
           <main className={styles.main}>{props.children}</main>
           <div className="m-auto" />
-          {/* Fix the footer to the bottom */}
-
         </div>
       </Page>
     </>

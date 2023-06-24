@@ -1,23 +1,20 @@
 {
-  "name": "krondor-org",
+  "name": "krondor",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/amiller68/krondor-org",
+  "repository": "https://github.com/amiller68/krondor",
   "author": "amiller68 <alexanderscottmiller@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "org",
-    "client",
-    "contracts"
-  ],
   "devDependencies": {
     "prettier": "^2.8.8"
   },
   "scripts": {
-    "dev": "cd org && yarn dev",
-    "build": "cd org && yarn build",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
-  }
+  },
+  "workspaces": [
+    "contracts",
+    "cli",
+    "org"
+   ]
 }

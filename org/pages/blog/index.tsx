@@ -3,51 +3,62 @@ import blogStyles from '@styles/pages/Blog.module.scss';
 import styles from '@styles/pages/Home.module.scss';
 import { NextPageWithLayout } from '../page';
 import * as React from 'react';
-// import PostCard, { IPostCard } from '@components/cards/post/PostCard';
 import BlogTable from '@components/tables/blog/BlogTable';
-import Post from '@lib/entities/post';
+import getBlogCid from '@lib/eth';
+import  getCidFromGateways  from '@lib/ipfs';
 
-const Blog: NextPageWithLayout = (_props: any) => {
-  const [ posts, setPosts ] = React.useState<Post[]>([]);
-  const [ router, setRouter ] = React.useState<any>(null);
+// Note: this is what is contained within <blog_cid>/manifest.json.posts[0]
+export interface IPost {
+  title: string;
+  date: string;
+  name: string;
+  cid: string;
+};
 
-  // TODO: Fallback on Github if IPFS is down.
+const Blog: NextPageWithLayout = () => {
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [manifest, setManifest] = React.useState<any>(null);
+  // const [history, setHistory] = React.useState<any>(null);
+  // Visited history
+  const [posts, setPosts] = React.useState<IPost[]>([]);
+
+  // Update the current manifest and history on cid change
   React.useEffect(() => {
-     fetch('/api/blog/')
-      .then((r) => r.json())
-      .then((data) => {
-        console.log(data);
-        fetch('/api/blog/' + data.cid)
-          .then((r) => r.json())
-          .then((data) => {
-            console.log("DATA", data);
-            // Read the posts from the content.
-            const manifest = JSON.parse(data.content);
-            console.log("MANIFEST", manifest);
-            setPosts(manifest.posts);
-            // console.log(c.posts);
-          }).catch((e) => {
-            console.log(e);
-            setPosts([]);
-          }
-        );
-      });
-  }, [router]);
-  // We don't have a real backend yet, so we'll just code the posts in here.
-  // const posts: Post[] = [
-  //   {
-  //     title: 'Welcome to Krondor.org',
-  //     date: '2021-01-01',
-  //     cid: 'bafkreiai4g4rxn3kkeqyi3vi4ovjs4ewugqxpek4x2kr7tlhbmhd2gw6nq',
-  //   },
-  // ];
+    const updateCid = async () => {
+      const blogCid = await getBlogCid();
+      const manifest_path = `${blogCid}/manifest.json`;
+      const history_path = `${blogCid}/history.json`;
+      const [ manifest, _ ] = await Promise.all([
+        getCidFromGateways(manifest_path, 'json'),
+        getCidFromGateways(history_path, 'json')
+      ]);
+      setManifest(manifest.content);
+      // setHistory(history.content);
+    };
+    updateCid();
+  }, []);
+
+  // Update display when manifest is fetched or history is fetched
+  React.useEffect(() => {
+    if (manifest) {
+      setPosts(manifest.posts);
+      setLoading(false);
+    }
+  }, [manifest]);
+
+  const applyFilters = () => {
+    let filtered = posts;
+    return filtered;
+  };
+
   return (
     <>
       <div className={styles.container}>
         <section className={styles.main}>
           <span className={styles.title}>Blog</span>
+          {loading && ( <p>Loading... </p> )}
           <div className={blogStyles.table}>
-            <BlogTable posts={posts} />
+            <BlogTable apply={applyFilters} />
           </div>
         </section>
       </div>

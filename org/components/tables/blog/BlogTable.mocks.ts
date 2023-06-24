@@ -1,13 +1,13 @@
-import Post from '../../../lib/entities/post';
 import { IBlogTable } from './BlogTable';
 
 const base = {
-  posts: [
+  apply: () => [
     {
       title: 'Post 1',
+      name: 'post-1',
       cid: 'QmVhcmVy',
       date: '2020-01-01',
-    } as Post,
+    },
   ],
 } as IBlogTable;
 

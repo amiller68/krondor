@@ -3,25 +3,21 @@ require('@openzeppelin/hardhat-upgrades');
 require('@nomiclabs/hardhat-etherscan');
 require('@nomicfoundation/hardhat-chai-matchers');
 require('hardhat-gas-reporter');
-require('dotenv').config({ path: '../env/chain.env' });
+require('dotenv').config({ path: './../.env' });
 
 module.exports = {
   solidity: '0.8.19',
   networks: {
-    goerli: {
-      url: process.env.RPC_URL,
+    sepolia: {
+      url: `https://sepolia.infura.io/v3/${process.env.RPC_API_KEY}`,
       accounts: [process.env.PRIVATE_KEY],
     },
     mainnet: {
-      url: process.env.RPC_URL,
-      accounts: [process.env.PRIVATE_KEY],
-    },
-    sepolia: {
-      url: process.env.RPC_URL,
+      url: `https://mainnet.infura.io/v3/${process.env.RPC_API_KEY}`,
       accounts: [process.env.PRIVATE_KEY],
     },
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: process.env.ETHERSCAN_API_KEY ?? '',
   },
 };
