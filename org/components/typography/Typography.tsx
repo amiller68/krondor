@@ -1,4 +1,4 @@
-import styles from './Typography.module.scss';
+import styles from './Typography.module.css';
 
 import React from 'react';
 

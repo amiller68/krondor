@@ -1,6 +1,6 @@
 {
   "name": "krondor",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "repository": "https://github.com/amiller68/krondor",
   "author": "amiller68 <alexanderscottmiller@gmail.com>",
   "license": "MIT",
@@ -9,12 +9,16 @@
     "prettier": "^2.8.8"
   },
   "scripts": {
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md,sol}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md,sol}\"",
+    "cli": "./cli/src/index.js"
   },
   "workspaces": [
     "contracts",
     "cli",
     "org"
-   ]
+  ],
+  "dependencies": {
+    "sass": "^1.63.6"
+  }
 }

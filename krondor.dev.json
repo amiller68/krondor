@@ -1,0 +1,15 @@
+{
+  "eth": {
+    "network": "sepolia",
+    "rpc_url": "https://sepolia.infura.io/v3",
+    "chain_id": 11155111,
+    "contract_address": "0xc934e8D23EE1EE25cB2bc22093a4E1cCedB2F6D1"
+  },
+  "ipfs": {
+    "endpoint": "http://127.0.0.1:5001",
+    "gateways": ["http://127.0.0.1:8080"]
+  },
+  "content_path": "./.github/dev/",
+  "manifest_filename": "manifest.json",
+  "history_filename": "history.json"
+}

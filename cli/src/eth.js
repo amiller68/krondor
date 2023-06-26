@@ -28,7 +28,20 @@ export default class BlogEthClient {
     this.chain_id = chain_id;
   }
 
-  async updateBlogCid(cid) {
+  async estimateGasUpdateBlogCid(cid) {
+    // Check the contract owner
+    const owner = await this.contract.methods.owner().call();
+    if (owner !== this.signer.address) {
+      throw new Error('Only the contract owner can update the CID');
+    }
+    const gas = await this.contract.methods.updateCID(cid).estimateGas({
+      from: this.signer.address,
+    });
+    const gasPrice = await this.web3.eth.getGasPrice();
+    return [gas, gasPrice];
+  }
+
+  async updateBlogCid(cid, gas, gasPrice) {
     // Check the contract owner
     const owner = await this.contract.methods.owner().call();
     if (owner !== this.signer.address) {
@@ -37,13 +50,13 @@ export default class BlogEthClient {
 
     const tx = this.contract.methods.updateCID(cid);
     const network = this.chain_id === 1 ? 'mainnet' : 'sepolia';
-
+    console.log('Submitting txn to ' + network + ' ...');
     const transactionParameters = {
       from: this.signer.address,
       to: this.contract.options.address, // contract address
       data: tx.encodeABI(), // Encoded contract function call
-      gas: '5000000',
-      gasPrice: await this.web3.eth.getGasPrice(),
+      gas: gas,
+      gasPrice: gasPrice,
       chainId: this.chain_id,
     };
 
@@ -62,6 +75,7 @@ export default class BlogEthClient {
       })
       .on('receipt', (receipt) => {
         console.log(`Mined in block ${receipt.blockNumber}`);
+        console.log(`Succeeded with ${receipt.gasUsed} gas used`);
       })
       .on('error', console.error);
   }

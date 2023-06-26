@@ -28,17 +28,3 @@ export default class History {
     });
   }
 }
-
-// export async function toFile(history, path) {
-//   // Convert the history to json
-//   const json = JSON.stringify(history);
-//   // Write the history to a file
-//   return new Promise((resolve, reject) => {
-//     fs.writeFile(path, json, (err) => {
-//       if (err) {
-//         reject(err);
-//       }
-//       resolve();
-//     });
-//   });
-// }

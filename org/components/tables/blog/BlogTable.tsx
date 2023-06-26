@@ -1,5 +1,4 @@
 import DataTable from 'react-data-table-component';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 const customStyles = {
@@ -20,7 +19,8 @@ export interface IBlogTable {
   apply: () => any[];
 }
 
-const BlogTable: React.FC<IBlogTable> = ({ apply }) => {
+const BlogTable: React.FC<IBlogTable> = (props: IBlogTable) => {
+  const { apply } = props;
   const router = useRouter();
   const overviewColumns = [
     {
@@ -39,7 +39,7 @@ const BlogTable: React.FC<IBlogTable> = ({ apply }) => {
     <div className="flex flex-row text-white">
       <button
         className="w-full bg-[#CB3535] "
-        onClick={async () => router.push('/blog/' + data.name)}
+        onClick={async () => router.push('/blog/' + data.cid)}
       >
         Read More
       </button>

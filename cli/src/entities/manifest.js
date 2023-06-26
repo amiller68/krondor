@@ -31,28 +31,11 @@ export default class Manifest {
   }
 }
 
-export async function toFile(manifest, path) {
-  // Convert the manifest to json
-  const json = JSON.stringify(manifest);
-  // Write the manifest to a file
-  return new Promise((resolve, reject) => {
-    fs.writeFile(path, json, (err) => {
-      if (err) {
-        reject(err);
-      }
-      resolve();
-    });
-  });
-}
-
 export function addPost(manifest, post) {
   // Make sure each post has a path, title, cid, and date
   if (!post.name || !post.title || !post.cid || !post.date) {
     throw new Error('Post is missing required fields');
   }
-  // if (!manifest.posts) {
-  //   manifest.posts = [];
-  // }
 
   // Make sure the post doesn't already exist
   if (_.find(manifest.posts, { name: post.name })) {

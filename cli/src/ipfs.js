@@ -1,12 +1,8 @@
-// const axios = require('axios');
-// const fs = require('fs');
-// const path = require('path');
-// const FormData = require('form-data');
-
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 import FormData from 'form-data';
+import Path from 'path';
 
 export default class BlogIpfsClient {
   auth;
@@ -42,6 +38,36 @@ export default class BlogIpfsClient {
         },
       })
       .then((res) => res.data.Hash)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  /*
+   * Pull a block to a local file
+   * @param cid The IPFS CID of the file to pull
+   * @param file_path The path to the file to pull to
+   * @throws An error if the file could not be pulled
+   */
+  async pullFile(cid, file_path) {
+    const path = Path.resolve(file_path);
+    const writer = fs.createWriteStream(path);
+    // TODO: Make this pull a whole file or directory
+    const url = `${this.endpoint}/api/v0/block/get?arg=${cid}`;
+    return axios(url, {
+      method: 'POST',
+      responseType: 'stream',
+      auth: {
+        ...this.auth,
+      },
+    })
+      .then((res) => {
+        res.data.pipe(writer);
+        return new Promise((resolve, reject) => {
+          writer.on('finish', resolve);
+          writer.on('error', reject);
+        });
+      })
       .catch((err) => {
         throw err;
       });

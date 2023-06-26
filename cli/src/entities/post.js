@@ -32,5 +32,3 @@ export default class Post {
     });
   }
 }
-
-// module.exports = Post;

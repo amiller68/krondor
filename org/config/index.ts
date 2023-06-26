@@ -1,17 +1,45 @@
-
+// Note: Be careful you don't fuck with any of these imports
+import BlogEthClient from '../../cli/src/eth.js';
 import config from '../../krondor.json';
+import BlogAbi from '../../contracts/artifacts/contracts/Blog.sol/Blog.json';
+import dotenv from 'dotenv';
+dotenv.config({ path: '../../.env' });
 
-export default async function getCidFromGateways(
+export default class Config {
+  config: any;
+  ethereum: any;
+  constructor() {
+    if (process.env.NODE_ENV === 'development') {
+      console.debug('Initializing development environment...');
+      this.config = require('../../krondor.dev.json');
+    } else {
+      this.config = require('../../krondor.json');
+    }
+    this.ethereum = new BlogEthClient(
+      BlogAbi.abi,
+      this.config.eth.contract_address,
+      `${this.config.eth.rpc_url}/${process.env.RPC_API_KEY}`,
+      this.config.eth.chain_id
+    );
+  }
+
+  public getBlogCid = async () => {
+    return await this.ethereum.getBlogCid();
+  };
+
+  public getCidFromGateways = async (
     cid: string,
     format: 'text' | 'json' = 'text'
-  ) {
-    let gateways = config.ipfs.gateways;
+  ) => {
+    let gateways = this.config.ipfs.gateways;
     let gateway = gateways[0];
     let content = '';
     let error = 0;
     for (let i = 0; i < gateways.length; i++) {
       try {
-        content = await fetch(gateways[i] + '/ipfs/' + cid).then((res) => {
+        content = await fetch(gateways[i] + '/ipfs/' + cid, {
+          mode: 'cors',
+        }).then((res) => {
           if (format === 'text') {
             return res.text();
           } else {
@@ -50,4 +78,5 @@ export default async function getCidFromGateways(
       }
       return { content: {}, error: errorMsg };
     }
-  }
+  };
+}

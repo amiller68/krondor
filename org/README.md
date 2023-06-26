@@ -1,24 +1,14 @@
 # Org
 
-The `krondor` frontend application, can serve as a template for a NextJS application or Blog.
-This site is built using NextJS, IPFS, and Ethereum in order to serve and manage the owners content.
-
-I hope to decentralize more of this as I keep on building. Right now this site is hosted on centralized server, but I want to implement static hosting and distrobution on IPFS.
-
-Feel free to fork this repository and use it for your own projects, as well as suggest updates or improvements.
-
-# Running locally
-
-## Prerequisites
-
-- NodeJS
-- Yarn
-
-## Install dependencies and run
+## Install dependencies
 
 ```bash
-cd org
 yarn install
+```
+
+## Run the dev server
+
+```bash
 yarn dev
 ```
 
@@ -28,17 +18,20 @@ yarn dev
 yarn lint
 ```
 
-## Run Storybook
+## Run Storybook for testing components
 
 ```bash
 yarn storybook
 ```
 
-# Future plans
+## Build the project
 
-I hope to have more updates soon! Expect:
+```bash
+yarn build
+```
 
-- Storybook for every component
-- documentation for finding and using the components
-- Test suite using selenium
-- More content!
+## Run the project in production mode
+
+```bash
+yarn start
+```

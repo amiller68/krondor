@@ -1,19 +1,11 @@
 {
-  "name": "krondor-cli",
+  "name": "@krondor/cli",
   "version": "0.0.0",
   "author": "amiller68 <alexanderscottmiller@gmail.com>",
   "homepage": "https://github.com/amiller68/krondor#readme",
   "license": "ISC",
   "main": "src/index.js",
   "type": "module",
-  "scripts": {
-    "init": "node src/index.js init",
-    "add": "node src/index.js add",
-    "remove": "node src/index.js remove",
-    "update": "node src/index.js update",
-    "publish": "node src/index.js publish",
-    "build": "echo \"No build specified\" && exit 0"
-  },
   "bugs": {
     "url": "https://github.com/amiller68/krondor-org/issues"
   },
