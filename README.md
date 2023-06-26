@@ -246,11 +246,11 @@ _Seeing your posts_
 
 Let's take a look at the blog now:
 
-![home-page](https://raw.githubusercontent.com/krondor/krondor/main/.github/docs/images/blog.png)
+![home-page](https://raw.githubusercontent.com/amiller68/krondor/main/.github/docs/images/blog.png)
 
 You can see your new post! Click on it to see the post page:
 
-![home-page](https://raw.githubusercontent.com/krondor/krondor/main/.github/docs/images/post.png)
+![home-page](https://raw.githubusercontent.com/amiller68/krondor/main/.github/docs/images/post.png)
 
 You can see the content you added to the markdown file! Cool!
 
