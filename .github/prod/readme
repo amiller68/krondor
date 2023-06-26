@@ -1,7 +1,3 @@
-# Readme V0.0.0
-
-2023-06-26T02:35:44.037Z
-
 # [KRONDOR]
 
 This project is me attempting to workout what exactly I'd want out of a distributed / verifibably public Conetent Management System (CMS) thingy, with included backend, owned or otherwise, data format, and views / viewers. It implements a blog as an example of how my ideas could work on distributed systems like IPFS and Ethereum, and maybe even other blockchains and Filecoin later on (pending some of my work with [Banyan](https://banyan.computer))
@@ -140,10 +136,10 @@ yarn dev
 
 This will start the frontend on `localhost:3000` by default. Open that up in your browser and you should see the blog!
 
-![home-page](https://raw.githubusercontent.com/krondor/krondor/main/.github/docs/images/home-page.png)
+![home-page](https://raw.githubusercontent.com/amiller68/krondor/main/.github/docs/images/home-page.png)
 
 Let's take a look at the blog now:
-![empty-blog](https://raw.githubusercontent.com/krondor/krondor/main/.github/docs/images/empty-blog.png)
+![empty-blog](https://raw.githubusercontent.com/amiller68/krondor/main/.github/docs/images/empty-blog.png)
 
 It's empty! Let's fix that by uploading some content.
 
@@ -250,11 +246,11 @@ _Seeing your posts_
 
 Let's take a look at the blog now:
 
-![home-page](https://raw.githubusercontent.com/krondor/krondor/main/.github/docs/images/blog.png)
+![home-page](https://raw.githubusercontent.com/amiller68/krondor/main/.github/docs/images/blog.png)
 
 You can see your new post! Click on it to see the post page:
 
-![home-page](https://raw.githubusercontent.com/krondor/krondor/main/.github/docs/images/post.png)
+![home-page](https://raw.githubusercontent.com/amiller68/krondor/main/.github/docs/images/post.png)
 
 You can see the content you added to the markdown file! Cool!
 
