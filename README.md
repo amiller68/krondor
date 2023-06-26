@@ -136,10 +136,10 @@ yarn dev
 
 This will start the frontend on `localhost:3000` by default. Open that up in your browser and you should see the blog!
 
-![home-page](https://raw.githubusercontent.com/krondor/krondor/main/.github/docs/images/home-page.png)
+![home-page](https://raw.githubusercontent.com/amiller68/krondor/main/.github/docs/images/home-page.png)
 
 Let's take a look at the blog now:
-![empty-blog](https://raw.githubusercontent.com/krondor/krondor/main/.github/docs/images/empty-blog.png)
+![empty-blog](https://raw.githubusercontent.com/amiller68/krondor/main/.github/docs/images/empty-blog.png)
 
 It's empty! Let's fix that by uploading some content.
 
