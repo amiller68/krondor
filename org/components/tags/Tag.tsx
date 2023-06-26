@@ -1,4 +1,4 @@
-import styles from './Tag.module.sass';
+import styles from './Tag.module.css';
 
 const Tag = (props: any) => {
   return (

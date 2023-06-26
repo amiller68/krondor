@@ -9,5 +9,6 @@
   },
   "include": ["./contract/**/*", "./scripts/**/*", "./test/**/*"],
   "exclude": ["node_modules", "dist", "artifacts", "cache"],
-  "files": ["./hardhat.config.ts"]
+  "files": ["./hardhat.config.ts"],
+  "project": "krondor-contracts"
 }

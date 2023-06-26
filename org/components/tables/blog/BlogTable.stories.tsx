@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import BlogTable from './BlogTable';
 import { mockFileCardProps } from './BlogTable.mocks';
-import Post from '@lib/entities/post';
 
 // An Example of a Storybook Story - Minimum Required to get a story to show up
 

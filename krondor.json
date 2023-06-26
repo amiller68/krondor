@@ -1,0 +1,20 @@
+{
+  "eth": {
+    "network": "sepolia",
+    "rpc_url": "https://sepolia.infura.io/v3",
+    "chain_id": 11155111,
+    "contract_address": "0xc934e8D23EE1EE25cB2bc22093a4E1cCedB2F6D1"
+  },
+  "ipfs": {
+    "endpoint": "https://ipfs.infura.io:5001",
+    "gateways": [
+      "https://krondor.ipfs-infura.io",
+      "https://ipfs.io",
+      "https://cloudflare-ipfs.com",
+      "https://ipfs.infura.io"
+    ]
+  },
+  "content_path": "./.github/prod/",
+  "manifest_filename": "manifest.json",
+  "history_filename": "history.json"
+}
