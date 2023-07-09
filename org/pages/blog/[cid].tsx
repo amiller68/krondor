@@ -10,7 +10,6 @@ import Config from '@config/index';
 // This is the blog post page component. It is responsible for fetching the post and pulling
 // content from IPFS and rendering it.
 const Post: NextPageWithLayout = (_props: any) => {
-  const config = new Config();
   const router = useRouter();
   const [content, setContent] = React.useState('');
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -19,6 +18,7 @@ const Post: NextPageWithLayout = (_props: any) => {
   React.useEffect(() => {
     const init = async (cid: string) => {
       console.log('Retrieving content with cid: ', cid);
+      const config = new Config();
       if (config) {
         const post = await config.getCidFromGateways(cid, 'text');
         if (post.error) {
@@ -35,7 +35,7 @@ const Post: NextPageWithLayout = (_props: any) => {
       const { cid } = router.query;
       init(cid as string);
     }
-  }, [router, config]);
+  }, [router]);
   return (
     <>
       <section className={styles.container}>

@@ -39,6 +39,7 @@ export default class Config {
       try {
         content = await fetch(gateways[i] + '/ipfs/' + cid, {
           mode: 'cors',
+          method: 'GET'
         }).then((res) => {
           if (format === 'text') {
             return res.text();

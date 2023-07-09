@@ -15,38 +15,31 @@ export interface IPost {
 }
 
 const Blog: NextPageWithLayout = () => {
-  const config = new Config();
   const [loading, setLoading] = React.useState<boolean>(true);
-  const [manifest, setManifest] = React.useState<any>(null);
   const [posts, setPosts] = React.useState<IPost[]>([]);
 
   // Update the current manifest and history on cid change
   React.useEffect(() => {
     const updateCid = async () => {
+      const config = new Config();
       const blogCid = await config.getBlogCid();
+      // Check if root is empty string 
+      if (blogCid === "") {
+        console.log("Empty Root! Try publishing something :)")
+        return;
+      }
       console.log('Found root CID:', blogCid);
       const manifest_path = `${blogCid}/manifest.json`;
       const [manifest] = await Promise.all([
         config.getCidFromGateways(manifest_path, 'json'),
       ]);
-      console.log('Retrieved manifest: ', manifest.content);
-      setManifest(manifest.content);
+      // @ts-ignore
+      setPosts(manifest.content.posts);
     };
-    updateCid();
-  }, []);
-
-  // Update display when manifest is fetched or history is fetched
-  React.useEffect(() => {
-    if (manifest) {
-      setPosts(manifest.posts);
+    updateCid().then(() => {
       setLoading(false);
-    }
-  }, [manifest]);
-
-  const applyFilters = () => {
-    let filtered = posts;
-    return filtered;
-  };
+    });
+  }, []);
 
   return (
     <>
@@ -54,8 +47,9 @@ const Blog: NextPageWithLayout = () => {
         <section className={styles.main}>
           <span className={styles.title}>Blog</span>
           {loading && <p>Loading... </p>}
+          { !loading && posts.length === 0 && <p>No posts found! Try publishing something :)</p>}
           <div className={blogStyles.table}>
-            <BlogTable apply={applyFilters} />
+            <BlogTable apply={() => posts} />
           </div>
         </section>
       </div>
