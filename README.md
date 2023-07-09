@@ -1,8 +1,6 @@
 # [KRONDOR]
 
-This project is me attempting to workout what exactly I'd want out of a distributed / verifibably public Conetent Management System (CMS) thingy, with included backend, owned or otherwise, data format, and views / viewers. It implements a blog as an example of how my ideas could work on distributed systems like IPFS and Ethereum, and maybe even other blockchains and Filecoin later on (pending some of my work with [Banyan](https://banyan.computer))
-
-I'm using this project as a way to learn more about the technologies involved and practice working with them, as well as to have a place to put my thoughts and ideas on other projects and ideas. Since the backend of this project essentially (tries to) implements a CMS, I figured a blog would be a good place to start for orienting my content and views, so why not start with a blog as an example to demonstrate the CMS and its (current) features.
+This project is me attempting to workout what exactly I'd want out of a distributed / publically verifiable  Conetent Management System (CMS) thingy, with included backend, owned or otherwise, data format, and views / viewers. It implements a blog as an example of how my ideas could work since blogs seem like a natural use case for CMSs. Meanwhile, it'd also be cool to have a place to publish my thoughts and ideas on other projects and interests, so why not build that too?
 
 You can see the current results of this process at [krondor.org](https://krondor.org)!
 
