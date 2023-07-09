@@ -1,7 +1,6 @@
 // Note: Be careful you don't fuck with any of these imports
 import BlogEthClient from '../../cli/src/eth.js';
-import config from '../../krondor.json';
-import BlogAbi from '../../contracts/artifacts/contracts/Blog.sol/Blog.json';
+import BlogAbi from '../../contracts/artifacts/contracts/blog.sol/Blog.json';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../.env' });
 
@@ -18,7 +17,7 @@ export default class Config {
     this.ethereum = new BlogEthClient(
       BlogAbi.abi,
       this.config.eth.contract_address,
-      `${this.config.eth.rpc_url}/${process.env.RPC_API_KEY}`,
+      `${this.config.eth.rpc_url}/${process.env.NEXT_PUBLIC_RPC_API_KEY}`,
       this.config.eth.chain_id
     );
   }
@@ -39,6 +38,7 @@ export default class Config {
       try {
         content = await fetch(gateways[i] + '/ipfs/' + cid, {
           mode: 'cors',
+          method: 'GET'
         }).then((res) => {
           if (format === 'text') {
             return res.text();

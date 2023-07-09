@@ -4,6 +4,8 @@ This project is me attempting to workout what exactly I'd want out of a distribu
 
 I'm using this project as a way to learn more about the technologies involved and practice working with them, as well as to have a place to put my thoughts and ideas on other projects and ideas. Since the backend of this project essentially (tries to) implements a CMS, I figured a blog would be a good place to start for orienting my content and views, so why not start with a blog as an example to demonstrate the CMS and its (current) features.
 
+You can see the current results of this process at [krondor.org](https://krondor.org)!
+
 # Blog Components
 
 Krondor is comprised of the following components:
@@ -50,8 +52,12 @@ You'll mostly just need to configure credentials for the services and ethereum a
 - `RPC_API_KEY` - The API key for the RPC endpoint you want to use
 - `ETHERSCAN_API_KEY` - The API key for the Etherscan API you want to use. This is only used to verify the contract on Etherscan.
 - `PRIVATE_KEY` - The private key of the Ethereum account you want to use to deploy the contract. This account will be the owner of the contract, and will be able to update the blog. This is only used by the CLI, and is not stored anywhere. I know this is not a good way to do this, so I'll probably change it later.
-- `IPFS_API_KEY` - The host of the IPFS API you want to use. This can be a local daemon (if needed), or a remote API like Infura.
-- `IPFS_API_SECRET` - The secret for the IPFS API you want to use. This can be a local daemon (if needed), or a remote API like Infura.
+- `IPFS_API_KEY` - The api key of the IPFS API you want to use. (optional)
+- `IPFS_API_SECRET` - The secret for the IPFS API you want to use. (optional)
+
+This is annoying. but for now you also have to set up a `.env` file in the `org` directory with the following values:
+
+- `NEXT_PUBLIC_API_KEY` - The API key for the RPC endpoint you want to use
 
 ### Public Environment Variables
 
@@ -85,6 +91,7 @@ ipfs daemon
 The API endpoint should be `127.0.0.1:5001/api/v0` on poand the gateway should be `127.0.0.1:8080/ipfs/`
 
 _Ethereum Setup_
+
 At this point you should have an Ethereum account configured in youe `.env` file. I've configured `krondor.dev.json` to use Sepolia testnet, so make sure you have some test ETH from their [faucet](https://sepoliafaucet.com/).
 
 Once you have an account, deploying the contract is as simple as running
@@ -175,7 +182,7 @@ You can update the content by adding and editing to the directory configured in 
 Start working in the `content_path` directory by running
 
 ```bash
-yarn cli -- init
+yarn cli init
 ```
 
 This initializes the `content_path` directory with empty manifest and history files.
@@ -183,7 +190,7 @@ This initializes the `content_path` directory with empty manifest and history fi
 Try adding a new blog post by running
 
 ```bash
-yarn cli -- add my-first-post "My First Post"
+yarn cli add my-first-post "My First Post"
 ```
 
 This adds a new blog post to the manifest with the title "My First Post" and creates a new markdown file in the `content_path` directory named "my-first-post'. You can edit this file with your favorite text editor and add some content.
@@ -209,13 +216,13 @@ This is my first post! I'm so excited to be writing this! I've been working on t
 Once you're done, be sure to update the manifest with the changes by running
 
 ```bash
-yarn cli -- update my-first-post
+yarn cli update my-first-post
 ```
 
 After that you can publish the manifest to IPFS and the contract by running
 
 ```bash
-yarn cli -- publish
+yarn cli publish
 ```
 
 You should be walked through the process of publishing the manifest to IPFS and the contract:
@@ -303,6 +310,16 @@ yarn start
 
 This will start the frontend on `localhost:3000` by default. Open that up in your browser and you should see the blog!
 
+Make sure you're server has access to your `RPC_API_KEY`
+
+If you set up deplpyments on Vercel like I did, you only need to:
+- set the `NEXT_PUBLIC_RPC_API_KEY` as a secret in the Vercel dashboard
+- set the build output directory to `org/.next` in the Vercel dashboard
+- set the build command to `cd org && yarn build` in the Vercel dashboard
+- set the install command to `yarn install` in the Vercel dashboard
+
+If you setup git hooks, then your frontend will be automatically deployed to Vercel on every push to `main`!
+
 _Update Content_
 
 In order to update or add content to production, you'll need to update the content in the `content_path` directory, and then run `cli` commands with the `--prod` flag. For example, to add a new post, you'd run
@@ -311,7 +328,6 @@ In order to update or add content to production, you'll need to update the conte
 yarn cli --prod add my-second-post "My Second Post"
 ```
 
-
 # Wrap Up
 
 You can see the current results of this process at [krondor.org](https://krondor.org)!
@@ -319,13 +335,11 @@ You can see the current results of this process at [krondor.org](https://krondor
 You can look into the readmes of the different components for more information on how they work and how to use them for development and deployment. Take a look at:
 
 - [contracts/README.md](https://raw.githubusercontent.com/krondor/krondor/main/contracts/README.md)
-- [cli/README.md](https://raw.githubusercontent.com/krondor/krondor/main/cli/README.md)
 - [org/README.md](https://raw.githubusercontent.com/krondor/krondor/main/org/README.md)
 
 # TODO
 Here's a list of things I want to do with this project:
 
 - [ ] Add a way to add images to posts within IPLD
-- [ ] Implement decentralized authentication
+- [ ] Implement decentralized authentication / device management
 - [ ] Implement onboarding blog data to Filecoin
-

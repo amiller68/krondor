@@ -1,6 +1,9 @@
 module.exports = {
   mode: 'jit',
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './pages/**/*.{js,jsx,ts,tsx}',
+    './components/**/*.{js,jsx,ts,tsx}',
+  ],
   plugins: [require('daisyui')],
   darkMode: ['class', '[data-theme="dark"]'],
   daisyui: {
@@ -126,11 +129,6 @@ module.exports = {
       zIndex: {
         max: '1000', // High enough to appear above the modal(999)
       },
-    },
-  },
-  purge: {
-    options: {
-      safelist: ['alert-success', 'alert-error', 'alert-info', 'alert-warning'],
     },
   },
 };

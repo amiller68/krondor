@@ -11,7 +11,8 @@
   "scripts": {
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md,sol}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md,sol}\"",
-    "cli": "./cli/src/index.js"
+    "cli": "./cli/src/index.js",
+    "build": "yarn workspaces run build"
   },
   "workspaces": [
     "contracts",

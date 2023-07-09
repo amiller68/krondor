@@ -6,6 +6,10 @@
 yarn install
 ```
 
+## Set Env variables
+
+Make sure you've set your `RPC_API_KEY` in `../.env`. You must expose it for production, so make sure to use an appropriate API Key!
+
 ## Run the dev server
 
 ```bash

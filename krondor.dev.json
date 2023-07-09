@@ -9,7 +9,7 @@
     "endpoint": "http://127.0.0.1:5001",
     "gateways": ["http://127.0.0.1:8080"]
   },
-  "content_path": "./.github/dev/",
+  "content_path": "./.github/content/dev/",
   "manifest_filename": "manifest.json",
   "history_filename": "history.json"
 }
