@@ -3,7 +3,7 @@
     "network": "sepolia",
     "rpc_url": "https://sepolia.infura.io/v3",
     "chain_id": 11155111,
-    "contract_address": "0xc934e8D23EE1EE25cB2bc22093a4E1cCedB2F6D1"
+    "contract_address": "0x05CEa15B2F3dD8A98f31618FdB1C0e546727a8a5"
   },
   "ipfs": {
     "endpoint": "https://ipfs.infura.io:5001",
@@ -14,7 +14,7 @@
       "https://ipfs.infura.io"
     ]
   },
-  "content_path": "./.github/prod/",
+  "content_path": "./.github/content/prod/",
   "manifest_filename": "manifest.json",
   "history_filename": "history.json"
 }

@@ -18,9 +18,9 @@
     "build": "npx hardhat compile",
     "test": "npx hardhat test",
     "deploy:dev": "NODE_ENV=development npx hardhat run --network default scripts/deploy.ts",
-    "deploy:prod": "npx hardhat run --network default scripts/deploy.ts",
-    "verify:dev": "NODE_ENV=development npx hardhat verify --contract 'contracts/blog.sol:Blog' ${0} --network default",
-    "verify:prod": "npx hardhat verify --contract 'contracts/blog.sol:Blog' ${0} --network default",
+    "deploy": "npx hardhat run --network default scripts/deploy.ts",
+    "verify:dev": "NODE_ENV=development npx hardhat verify --contract 'contracts/blog.sol:Blog' ${1} --network default",
+    "verify": "npx hardhat verify --contract 'contracts/blog.sol:Blog' ${1} --network default",
     "clean": "npx hardhat clean"
   },
   "devDependencies": {
