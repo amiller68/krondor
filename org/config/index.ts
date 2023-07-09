@@ -17,7 +17,7 @@ export default class Config {
     this.ethereum = new BlogEthClient(
       BlogAbi.abi,
       this.config.eth.contract_address,
-      `${this.config.eth.rpc_url}/${process.env.RPC_API_KEY}`,
+      `${this.config.eth.rpc_url}/${process.env.NEXT_PUBLIC_RPC_API_KEY}`,
       this.config.eth.chain_id
     );
   }

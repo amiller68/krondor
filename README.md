@@ -53,6 +53,10 @@ You'll mostly just need to configure credentials for the services and ethereum a
 - `IPFS_API_KEY` - The api key of the IPFS API you want to use. (optional)
 - `IPFS_API_SECRET` - The secret for the IPFS API you want to use. (optional)
 
+This is annoying. but for now you also have to set up a `.env` file in the `org` directory with the following values:
+
+- `NEXT_PUBLIC_API_KEY` - The API key for the RPC endpoint you want to use
+
 ### Public Environment Variables
 
 All other configuration is and must be public all over the repo. This includes:
