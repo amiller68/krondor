@@ -20,7 +20,7 @@ module.exports = {
   networks: {
     default: {
       url: `${config.eth.rpc_url}/${process.env.RPC_API_KEY}`,
-      accounts: [process.env.PRIVATE_KEY],
+      accounts: [process.env.PRIVATE_KEY] ?? 'remote'
     },
   },
   etherscan: {
