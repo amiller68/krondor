@@ -306,7 +306,13 @@ This will start the frontend on `localhost:3000` by default. Open that up in you
 
 Make sure you're server has access to your `RPC_API_KEY`
 
-If you set up deplpyments on Vercel like I did, you only need to set the `RPC_API_KEY` as a secret in the Vercel dashboard, and then you can deploy the frontend by just pushing to the `main` branch of the repo.
+If you set up deplpyments on Vercel like I did, you only need to:
+- set the `RPC_API_KEY` as a secret in the Vercel dashboard
+- set the build output directory to `org/.next` in the Vercel dashboard
+- set the build command to `yarn build` in the Vercel dashboard
+- set the install command to `yarn install` in the Vercel dashboard
+
+If you setup git hooks, then your frontend will be automatically deployed to Vercel on every push to `main`!
 
 _Update Content_
 

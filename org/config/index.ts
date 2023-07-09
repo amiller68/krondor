@@ -1,7 +1,6 @@
 // Note: Be careful you don't fuck with any of these imports
 import BlogEthClient from '../../cli/src/eth.js';
-import config from '../../krondor.json';
-import BlogAbi from '../../contracts/artifacts/contracts/Blog.sol/Blog.json';
+import BlogAbi from '../../contracts/artifacts/contracts/blog.sol/Blog.json';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../.env' });
 
