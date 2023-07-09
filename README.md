@@ -304,6 +304,10 @@ yarn start
 
 This will start the frontend on `localhost:3000` by default. Open that up in your browser and you should see the blog!
 
+Make sure you're server has access to your `RPC_API_KEY`
+
+If you set up deplpyments on Vercel like I did, you only need to set the `RPC_API_KEY` as a secret in the Vercel dashboard, and then you can deploy the frontend by just pushing to the `main` branch of the repo.
+
 _Update Content_
 
 In order to update or add content to production, you'll need to update the content in the `content_path` directory, and then run `cli` commands with the `--prod` flag. For example, to add a new post, you'd run
@@ -327,4 +331,3 @@ Here's a list of things I want to do with this project:
 - [ ] Add a way to add images to posts within IPLD
 - [ ] Implement decentralized authentication / device management
 - [ ] Implement onboarding blog data to Filecoin
-
