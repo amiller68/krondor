@@ -8,7 +8,7 @@
   "ipfs": {
     "endpoint": "https://ipfs.infura.io:5001",
     "gateways": [
-      "https://krondor.ipfs-infura.io",
+      "https://krondor.infura-ipfs.io",
       "https://ipfs.io",
       "https://cloudflare-ipfs.com",
       "https://ipfs.infura.io"
