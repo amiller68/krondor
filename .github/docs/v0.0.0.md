@@ -2,7 +2,7 @@
 
 This project is me attempting to workout what exactly I'd want out of a distributed / publically verifiable  Conetent Management System (CMS) thingy, with included backend, owned or otherwise, data format, and views / viewers. It implements a blog as an example of how my ideas could work since blogs seem like a natural use case for CMSs. Meanwhile, it'd also be cool to have a place to publish my thoughts and ideas on other projects and interests, so why not build that too?
 
-You can see the current results of this process at [krondor.org](https://krondor.org)!
+You can see the current results of this process at [krondor.org](https://www.krondor.org)!
 
 # Blog Components
 
@@ -328,7 +328,7 @@ yarn cli --prod add my-second-post "My Second Post"
 
 # Wrap Up
 
-You can see the current results of this process at [krondor.org](https://krondor.org)!
+You can see the current results of this process at [krondor.org](https://www.krondor.org)!
 
 You can look into the readmes of the different components for more information on how they work and how to use them for development and deployment. Take a look at:
 
